@@ -1,0 +1,12 @@
+{
+  "SeeDocsAt": "https://github.com/Microsoft/AirSim/blob/master/docs/settings.md",
+  "SettingsVersion": 1.1,
+  "CaptureSettings": [
+	  {
+		"ImageType": 0,
+		"Width": 720,
+		"Height": 360,
+		"TargetGamma": 3.0
+	  }
+	]
+}
