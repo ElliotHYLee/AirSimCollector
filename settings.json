@@ -1,7 +1,12 @@
 {
   "SeeDocsAt": "https://github.com/Microsoft/AirSim/blob/master/docs/settings.md",
   "SettingsVersion": 1.2,
-  "ClockSpeed": 10,
+  "SimMode": "Multirotor",
+  "ClockSpeed": 1,
+  "Gimbal": {
+      "Stabilization": 1,
+      "Pitch": 0, "Roll": 0
+    },
   "CameraDefaults": {
 	"CaptureSettings": [
 	  {
@@ -11,5 +16,5 @@
 		"TargetGamma": 3.0
 	  }
 	]
-  }
+  }  
 }
