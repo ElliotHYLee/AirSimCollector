@@ -109,7 +109,7 @@ class Navigation():
     def isArrived(self, targetPos, preDist = 0):
         pos = self.getPos()
         dist = self.getDistance(pos, targetPos) - preDist
-        if (dist < 2 and self.getSpeed()<0.01):
+        if (dist < 5 and self.getSpeed()<0.01):
             return True
         else:
             return False
