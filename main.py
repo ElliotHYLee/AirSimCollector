@@ -11,6 +11,7 @@ import numpy as np
 lock = threading.Lock()
 
 drone = MyDrone()
+dr = DataRecorder(drone, lock)
 nav = Navigation(drone.drone, lock)
 nav.takeoff()
 
@@ -20,7 +21,7 @@ try:
     #drone.drone.moveByAngleZAsync(0.5, 0, 0, 0, duration=10 ** 0)
     for i in range(0, 100):
         drone.drone.moveByVelocityAsync(0, 0, -2, duration=0.01)
-    #drone.drone.moveByAngleThrottleAsync(0.5, 0, 100, 0, duration=1)
+
 except:
     print('err')
     pass

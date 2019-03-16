@@ -18,11 +18,18 @@ class Controller():
         self.drone = drone
         self.lock = lock
 
-    def setAttitude(self, roll, pitch, yaw):
-        pitch = pitch * np.pi / 180
-        roll = roll * np.pi / 180
-        yaw = yaw * np.pi / 180
-        z = 0
-        self.drone.moveByAngleZAsync(pitch, roll, z, yaw, duration=10**-4)
+    def getDistance(self, p1, p2):
+        tx, ty, tz = p2[0], p2[1], p2[2]
+        x, y, z = p1
+        loss = np.array([tx - x, ty - y, tz - z])
+        loss2 = np.dot(loss, loss)
+        dist = np.sqrt(loss2)
+        return dist
+
+    def setPoint(self, tp):
+        pass
+
+    def setVelocity(self, tv):
+        self.drone.moveByVelocityAsync(tv[0], tv[1], -tv[2], duration=0.01)
 
 
