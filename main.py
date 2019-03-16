@@ -8,7 +8,7 @@ lock = threading.Lock()
 drone = MyDrone()
 dr = DataRecorder(drone, lock)
 
-while dr.numData < 200:
+while dr.numData < 7000:
     if dr.numData % 100 == 0:
         print(dr.numData)
         time.sleep(1)

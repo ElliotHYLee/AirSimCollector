@@ -30,10 +30,10 @@ class DataRecorder():
                 now = time.time()
                 elapsed = now - prev
             dt = (t - prevT) / 10 ** 9
-            try:
-                print(1 / dt)
-            except:
-                pass
+            # try:
+            #     print(1 / dt)
+            # except:
+            #     pass
             prev = now
 
         self.dm.closeFile()

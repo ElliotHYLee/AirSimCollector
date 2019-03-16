@@ -12,13 +12,6 @@ class MyDrone():
         self.drone.armDisarm(True)
         time.sleep(1)
 
-    def setAttitude(self, roll, pitch, yaw):
-        pitch = pitch * np.pi / 180
-        roll = roll * np.pi / 180
-        yaw = yaw * np.pi / 180
-        z = 0
-        self.drone.moveByAngleZAsync(pitch, roll, z, yaw, duration=10**-4)
-
     def getState(self):
         self.drone_state_gt = self.drone.simGetGroundTruthKinematics()
         self.drone_state_est = self.drone.getMultirotorState()
@@ -31,8 +24,7 @@ class MyDrone():
         dvdt = self.drone_state_est.kinematics_estimated.linear_acceleration
         dvdt = np.array([dvdt.x_val, dvdt.y_val, dvdt.z_val], dtype=np.float32)
 
-        return self.timeStamp, self.getXYZ(vel_gt), self.getXYZ(pos_gt),\
-               self.getWXYZ(quat_gt), dwdt, dvdt
+        return self.timeStamp, self.getXYZ(vel_gt), self.getXYZ(pos_gt), self.getWXYZ(quat_gt), dwdt, dvdt
 
     def depthImg(self, data):
         img1d = np.array(data.image_data_float, dtype=np.float)
