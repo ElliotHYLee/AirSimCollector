@@ -83,9 +83,9 @@ class Navigation():
             self.drone.moveToPositionAsync(tp[0], tp[1], tp[2], v)
 
     def move(self, tp):
-        self.moveToTargetPoint(tp, 8)
+        self.moveToTargetPoint(tp, 16)
         self.waitForPreCheckPoint(tp, preDist=50)
-        self.moveToTargetPoint(tp, 5)
+        self.moveToTargetPoint(tp, 10)
         self.waitForPreCheckPoint(tp, preDist=10)
         self.moveToTargetPoint(tp, 1)
         self.waitWhile(tp)
@@ -109,7 +109,7 @@ class Navigation():
     def isArrived(self, targetPos, preDist = 0):
         pos = self.getPos()
         dist = self.getDistance(pos, targetPos) - preDist
-        if (dist < 1 and self.getSpeed()<0.01):
+        if (dist < 2 and self.getSpeed()<0.01):
             return True
         else:
             return False
