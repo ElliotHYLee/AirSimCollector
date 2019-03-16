@@ -6,24 +6,12 @@ import os
 from PIL import Image
 class MyDrone():
     def __init__(self):
-        print('im here1')
         self.drone = airsim.MultirotorClient()
-        print('im here2')
-        #self.resetAll()
-        print('im here3')
+        self.resetAll()
         self.drone.confirmConnection()
-        print('im here4')
-        #self.drone.enableApiControl(True)
+        self.drone.enableApiControl(True)
         self.drone.armDisarm(True)
-        print('im here5')
         time.sleep(1)
-
-    def setAttitude(self, roll, pitch, yaw):
-        pitch = pitch * np.pi / 180
-        roll = roll * np.pi / 180
-        yaw = yaw * np.pi / 180
-        z = 0
-        self.drone.moveByAngleZAsync(pitch, roll, z, yaw, duration=10**-4)
 
     def getState(self):
         self.drone_state_gt = self.drone.simGetGroundTruthKinematics()
@@ -53,15 +41,22 @@ class MyDrone():
         newImage1 = np.array(newImage1, dtype=np.uint8)
         return newImage1
 
-    def saveImg(self, t, path):
-        #img = self.drone.simGetImages([airsim.ImageRequest(0, airsim.ImageType.Scene)])[0].image_data_uint8
+    def saveRawImg(self, t, path):
+        img = self.drone.simGetImages([airsim.ImageRequest(0, airsim.ImageType.Scene)])[0].image_data_uint8
+        airsim.write_file(path + 'img_' + str(t) + '.png', img)
+
+    def saveSemImg(self, t, path):
+        # change settings.json image type = 5
+        img = self.drone.simGetImages([airsim.ImageRequest(0, airsim.ImageType.Segmentation)])[0].image_data_uint8
+        airsim.write_file(path + 'img_' + str(t) + '.png', img)
+
+    def saveDepImg(self, t, path):
         responses = self.drone.simGetImages([airsim.ImageRequest(0, airsim.ImageType.DepthPerspective, True)])
         depthImg = self.depthImg(responses[0])
 
-        # cv2.imshow('asdf', newImage1)
+        # cv2.imshow('asdf', depthImg)
         # cv2.waitKey(1)
         cv2.imwrite(path + 'img_' + str(t) + '.png', depthImg)
-        #airsim.write_file(path + 'img_' + str(t) + '.png', img)
 
     def getWXYZ(self, obj):
         res = [obj.w_val, obj.x_val, obj.y_val, obj.z_val]

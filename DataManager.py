@@ -20,7 +20,7 @@ class DataManager():
             print('error: cannot create a folder')
 
     def saveImg(self, t):
-       self.vehicle.saveImg(t, self.path + '/images/')
+       self.vehicle.saveRawImg(t, self.path + '/images/')
 
     def writeToFile(self, t, vel, pos, quat, dwdt, dvdt):
         fName = 'img_' + str(t) + '.png'
