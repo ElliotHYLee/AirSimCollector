@@ -57,7 +57,7 @@ class Navigation():
 
     def takeoff(self):
         print('taking off')
-        target = -3
+        target = -2
         pos = self.getPos()
         with self.lock:
             self.drone.moveToPositionAsync(pos[0], pos[1], target, 3)

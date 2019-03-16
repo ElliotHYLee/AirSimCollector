@@ -18,19 +18,11 @@ class Controller():
         self.drone = drone
         self.lock = lock
 
-    def setPitch(self, ref):
-        state = self.drone.getState()
-        roll, pitch, yaw = 0, 0, 0
-        self.setAttitude(roll, pitch, yaw)
-
     def setAttitude(self, roll, pitch, yaw):
         pitch = pitch * np.pi / 180
         roll = roll * np.pi / 180
         yaw = yaw * np.pi / 180
         z = 0
         self.drone.moveByAngleZAsync(pitch, roll, z, yaw, duration=10**-4)
-
-
-
 
 

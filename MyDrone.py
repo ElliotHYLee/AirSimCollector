@@ -7,9 +7,8 @@ from PIL import Image
 class MyDrone():
     def __init__(self):
         self.drone = airsim.MultirotorClient()
-        self.resetAll()
-        self.drone.confirmConnection()
         self.drone.enableApiControl(True)
+        self.drone.confirmConnection()
         self.drone.armDisarm(True)
         time.sleep(1)
 
@@ -25,8 +24,7 @@ class MyDrone():
         dvdt = self.drone_state_est.kinematics_estimated.linear_acceleration
         dvdt = np.array([dvdt.x_val, dvdt.y_val, dvdt.z_val], dtype=np.float32)
 
-        return self.timeStamp, self.getXYZ(vel_gt), self.getXYZ(pos_gt),\
-               self.getWXYZ(quat_gt), dwdt, dvdt
+        return self.timeStamp, self.getXYZ(vel_gt), self.getXYZ(pos_gt), self.getWXYZ(quat_gt), dwdt, dvdt
 
     def depthImg(self, data):
         img1d = np.array(data.image_data_float, dtype=np.float)
@@ -65,10 +63,6 @@ class MyDrone():
     def getXYZ(self, obj):
         res = [obj.x_val, obj.y_val, obj.z_val]
         return np.array(res, dtype=np.float32)
-
-    def resetAll(self):
-        self.drone.enableApiControl(False)
-        self.drone.reset()
 
     def reset(self):
         self.drone.reset()

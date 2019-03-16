@@ -14,9 +14,13 @@ drone = MyDrone()
 nav = Navigation(drone.drone, lock)
 nav.takeoff()
 
-# ctrl = Controller(drone.drone, lock)
+ctrl = Controller(drone.drone, lock)
+
 try:
-    drone.setAttitude(0, 10, 0)
+    #drone.drone.moveByAngleZAsync(0.5, 0, 0, 0, duration=10 ** 0)
+    for i in range(0, 100):
+        drone.drone.moveByVelocityAsync(0, 0, -2, duration=0.01)
+    #drone.drone.moveByAngleThrottleAsync(0.5, 0, 100, 0, duration=1)
 except:
     print('err')
     pass
